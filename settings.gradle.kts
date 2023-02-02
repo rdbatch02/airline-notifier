@@ -1,3 +1,3 @@
 
-rootProject.name = "airline-notifier"
+rootProject.name = "atis"
 
