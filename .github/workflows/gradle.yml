@@ -10,6 +10,7 @@ name: Gradle Build and Publish
 on:
   push:
     branches: [ "main" ]
+    tags: "*.*.*"
   pull_request:
     branches: [ "main" ]
 
