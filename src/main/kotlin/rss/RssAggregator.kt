@@ -1,16 +1,15 @@
 package rss
 
-import rss.sources.AeroRoutes
+import rss.sources.Source
 import util.DateWindow
 import util.containsAny
 
 object RssAggregator {
-    private suspend fun getAllSourceFeeds(): List<Record> {
-        val sources = listOf(AeroRoutes)
+    private suspend fun getAllSourceFeeds(sources: List<Source>): List<Record> {
         return sources.flatMap { it.getRecords() }
     }
 
-    private fun applyFilters(keywords: List<String>?, dateRange: DateWindow?, sourceData: List<Record>): List<Record> {
+    private fun applyFilters(sourceData: List<Record>, keywords: List<String>?, dateRange: DateWindow?): List<Record> {
         var filteredData = sourceData.toMutableList()
         if (keywords != null) {
             filteredData = filteredData.filter {
@@ -23,7 +22,7 @@ object RssAggregator {
         return filteredData
     }
 
-    suspend fun filteredRssData(keywords: List<String>? = null, dateRange: DateWindow? = null): List<Record> {
-        return applyFilters(keywords, dateRange, getAllSourceFeeds())
+    suspend fun filteredRssData(sources: List<Source>, keywords: List<String>? = null, dateRange: DateWindow? = null): List<Record> {
+        return applyFilters(getAllSourceFeeds(sources), keywords, dateRange)
     }
 }
