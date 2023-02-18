@@ -56,3 +56,4 @@ node_modules
 cdk.out
 `
 config.ts
+deployment/build/

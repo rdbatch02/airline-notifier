@@ -8,7 +8,13 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "get-latest": "scripts/get-latest-release.sh",
+    "get-snapshot": "scripts/build-snapshot-release.sh",
+    "clean": "rm -rf build",
+    "deploy-latest": "npm run clean && npm run get-latest && cdk deploy",
+    "deploy-snapshot": "npm run clean && npm run get-snapshot && cdk deploy"
+    
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",

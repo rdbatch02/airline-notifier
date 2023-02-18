@@ -53,7 +53,7 @@ export class DeploymentStack extends cdk.Stack {
       architecture: lambda.Architecture.ARM_64,
       memorySize: 512,
       timeout: Duration.minutes(1),
-      code: lambda.Code.fromAsset("../build/libs/atis-1.0-SNAPSHOT-all.jar"),
+      code: lambda.Code.fromAsset("build/atis.jar"),
       handler: "MainKt::lambdaHandler",
       role: handlerRole
     })
