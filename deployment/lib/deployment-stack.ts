@@ -5,7 +5,7 @@ import * as iam from 'aws-cdk-lib/aws-iam'
 import * as ssm from 'aws-cdk-lib/aws-ssm'
 import * as targets from 'aws-cdk-lib/aws-events-targets'
 import { Construct } from 'constructs'
-import { Effect } from 'aws-cdk-lib/aws-iam'
+import { Effect, ManagedPolicy } from 'aws-cdk-lib/aws-iam'
 import { config } from './config/config'
 import { Duration } from 'aws-cdk-lib'
 
@@ -34,6 +34,7 @@ export class DeploymentStack extends cdk.Stack {
 
     const handlerRole = new iam.Role(this, 'atis-handler-role', {
       assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
+      managedPolicies: [ManagedPolicy.fromAwsManagedPolicyName("service-role/AWSLambdaBasicExecutionRole")],
       inlinePolicies: {
         "SesPolicy": new iam.PolicyDocument({
           statements: [new iam.PolicyStatement({
